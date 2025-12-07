@@ -1,2 +1,4 @@
 .dvc/config
 .dvc/config
+src/utils/safe_conversion.py
+src/utils/validate_data.py
