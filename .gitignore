@@ -2,6 +2,5 @@
 .dvc/config
 src/utils/safe_conversion.py
 src/utils/validate_data.py
-.dvcignore
 /MachineLearningRating_v3_cleaned.csv
 /MachineLearningRating_v3.txt
