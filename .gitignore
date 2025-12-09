@@ -18,5 +18,7 @@ dvc_data/MachineLearningRating_v3.txt
 .gitattributes
 dvc_data/MachineLearningRating_v3_cleaned.csv.dvc
 dvc_data/MachineLearningRating_v3.txt.dvc
+__pycache__/app.cpython-314.pyc
+modeling_dir/__pycache__/predict.cpython-314.pyc
 modeling_dir/__pycache__/predict.cpython-314.pyc
 __pycache__/app.cpython-314.pyc
