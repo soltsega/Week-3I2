@@ -7,3 +7,5 @@ src/utils/validate_data.py
 dvc_data/MachineLearningRating_v3_cleaned.csv
 dvc_data/MachineLearningRating_v3.txt
 .gitattributes
+dvc_data/MachineLearningRating_v3_cleaned.csv.dvc
+dvc_data/MachineLearningRating_v3.txt.dvc
