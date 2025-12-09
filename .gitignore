@@ -2,7 +2,6 @@
 .dvc/config
 src/utils/safe_conversion.py
 src/utils/validate_data.py
-.dvcignore
 /MachineLearningRating_v3_cleaned.csv
 /MachineLearningRating_v3.txt
 dvc_data/MachineLearningRating_v3.txt.dvc
@@ -10,3 +9,12 @@ dvc_data/MachineLearningRating_v3_cleaned.csv.dvc
 .gitattributes
 dvc_data/MachineLearningRating_v3_cleaned.csv
 dvc_data/MachineLearningRating_v3.txt
+dvc_data/MachineLearningRating_v3_cleaned.csv
+dvc_data/MachineLearningRating_v3_cleaned.csv.dvc
+dvc_data/MachineLearningRating_v3.txt.dvc
+dvc_data/MachineLearningRating_v3.txt
+.gitattributes
+dvc_data/MachineLearningRating_v3.txt
+.gitattributes
+dvc_data/MachineLearningRating_v3_cleaned.csv.dvc
+dvc_data/MachineLearningRating_v3.txt.dvc
