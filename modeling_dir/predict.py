@@ -72,14 +72,14 @@ class PremiumOptimizer:
             else:
                 # Fallback if feature names not available
                 self.prob_features = [
-                    'CalculatedPremiumPerTerm',
-                    'CoverCategory_freq',
-                    'CoverGroup_freq',
-                    'CoverType_freq',
-                    'ExcessSelected_freq',
-                    'Section_freq',
                     'SumInsured',
-                    'TotalPremium'
+                    'CalculatedPremiumPerTerm',
+                    'TotalPremium',
+                    'ExcessSelected_freq',
+                    'CoverCategory_freq',
+                    'CoverType_freq',
+                    'CoverGroup_freq',
+                    'Section_freq'
                 ]
             
             # For XGBoost model
@@ -99,39 +99,39 @@ class PremiumOptimizer:
     def preprocess_input(self, input_data: Dict[str, Any]) -> Tuple[pd.DataFrame, pd.DataFrame]:
         """Preprocess input data for prediction with correct feature order and transformations."""
         try:
-        # Convert input to DataFrame
-        df = pd.DataFrame([input_data])
-        
-        # Add log transformations if needed
-        if 'TotalPremium' in df.columns and 'log_TotalPremium' not in df.columns:
-            df['log_TotalPremium'] = np.log1p(df['TotalPremium'])
-        if 'TotalClaims' in df.columns and 'log_TotalClaims' not in df.columns:
-            df['log_TotalClaims'] = np.log1p(df['TotalClaims'])
-        
-        # Ensure all required columns exist
-        missing_severity = set(self.severity_features) - set(df.columns)
-        missing_prob = set(self.prob_features) - set(df.columns)
-        
-        if missing_severity:
-            logger.warning(f"Missing features for severity model: {missing_severity}")
-        if missing_prob:
-            logger.warning(f"Missing features for probability model: {missing_prob}")
-        
-        # Ensure all required columns exist
-        all_required = set(self.severity_features + self.prob_features)
-        missing_cols = all_required - set(df.columns)
-        if missing_cols:
-            raise ValueError(f"Missing required features: {missing_cols}")
-        
-        # Reorder columns to match training data
-        severity_df = df[self.severity_features]
-        prob_df = df[self.prob_features]
-        
-    return severity_df, prob_df
-        
+            # Convert input to DataFrame
+            df = pd.DataFrame([input_data])
+            
+            # Add log transformations if needed
+            if 'TotalPremium' in df.columns and 'log_TotalPremium' not in df.columns:
+                df['log_TotalPremium'] = np.log1p(df['TotalPremium'])
+            if 'TotalClaims' in df.columns and 'log_TotalClaims' not in df.columns:
+                df['log_TotalClaims'] = np.log1p(df['TotalClaims'])
+            
+            # Ensure all required columns exist
+            missing_severity = set(self.severity_features) - set(df.columns)
+            missing_prob = set(self.prob_features) - set(df.columns)
+            
+            if missing_severity:
+                logger.warning(f"Missing features for severity model: {missing_severity}")
+            if missing_prob:
+                logger.warning(f"Missing features for probability model: {missing_prob}")
+            
+            # Ensure all required columns exist
+            all_required = set(self.severity_features + self.prob_features)
+            missing_cols = all_required - set(df.columns)
+            if missing_cols:
+                raise ValueError(f"Missing required features: {missing_cols}")
+            
+            # Reorder columns to match training data
+            severity_df = df[self.severity_features]
+            prob_df = df[self.prob_features]
+            
+            return severity_df, prob_df
+            
         except Exception as e:
-        logger.error(f"Error in preprocessing: {str(e)}")
-        raise
+            logger.error(f"Error in preprocessing: {str(e)}")
+            raise
     
     def predict(self, input_data: Dict[str, Any]) -> Dict[str, float]:
         """Make predictions for a single policy."""
@@ -172,14 +172,15 @@ def main():
         
         # Example input - update with your actual feature values
         example_input = {
-            'CalculatedPremiumPerTerm': 1000.0,
-            'CoverCategory_freq': 0.5,
-            'CoverGroup_freq': 0.3,
-            'CoverType_freq': 0.4,
-            'ExcessSelected_freq': 0.2,
-            'Section_freq': 0.1,
             'SumInsured': 50000.0,
-            'TotalPremium': 1200.0
+            'CalculatedPremiumPerTerm': 1000.0,
+            'TotalPremium': 1200.0,
+            'TotalClaims': 500.0,  # Added for log transformation
+            'ExcessSelected_freq': 0.2,
+            'CoverCategory_freq': 0.5,
+            'CoverType_freq': 0.4,
+            'CoverGroup_freq': 0.3,
+            'Section_freq': 0.1
         }
         
         print("\nExpected feature order for probability model:", predictor.prob_features)
