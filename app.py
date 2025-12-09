@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import Dict, Any
-from predict import PremiumOptimizer
+from modeling_dir.predict import PremiumOptimizer
 import logging
 
 # Configure logging
